@@ -366,7 +366,16 @@ module Arel
             SELECT "users"."id" FROM "users" WHERE ("users"."id" = 1 OR "users"."id" = 2)
           }
         end
-
+        
+        it "should handle empty collection" do
+          relation = Table.new(:users)
+          mgr = relation.project relation[:id]
+          mgr.where relation[:id].eq_any([])
+          mgr.to_sql.must_be_like %{
+            SELECT "users"."id" FROM "users" WHERE (NULL)
+          }
+        end
+        
         it 'should not eat input' do
           relation = Table.new(:users)
           mgr = relation.project relation[:id]
