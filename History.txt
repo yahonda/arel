@@ -1,8 +1,14 @@
+=== 7.1.2 / 2016-09-13
+
+* bug fixes
+
+  * Don't store all aliases to a table
+
 === 7.1.1 / 2016-07-27
 
-* Bug Fixes
+* bug fixes
 
-  * Fix warning in `Casted#hash`
+  * fix warning in `casted#hash`
 
 === 7.1.0 / 2016-07-19
 
