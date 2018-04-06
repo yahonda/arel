@@ -30,15 +30,15 @@ module Arel
 
     def self.build_quoted other, attribute = nil
       case other
-        when Arel::Nodes::Node, Arel::Attributes::Attribute, Arel::Table, Arel::Nodes::BindParam, Arel::SelectManager, Arel::Nodes::Quoted, Arel::Nodes::SqlLiteral
-          other
+      when Arel::Nodes::Node, Arel::Attributes::Attribute, Arel::Table, Arel::Nodes::BindParam, Arel::SelectManager, Arel::Nodes::Quoted, Arel::Nodes::SqlLiteral
+        other
+      else
+        case attribute
+        when Arel::Attributes::Attribute
+          Casted.new other, attribute
         else
-          case attribute
-            when Arel::Attributes::Attribute
-              Casted.new other, attribute
-            else
-              Quoted.new other
-          end
+          Quoted.new other
+        end
       end
     end
   end
